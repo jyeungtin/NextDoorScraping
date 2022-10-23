@@ -14,13 +14,16 @@ The scraping of the following items can be automated:
 2. Expand comments 
 3. Comments count and comment text
 4. Body texts
-5. Post ID
-6. Formatted date (with exceptions, see [to-dos](https://github.com/jyeungtin/NextDoorScraping/edit/main/README.md#to-do))
+5. Post and comment ID
+6. Formatted date 
 7. Scrolling by date (with exceptions, see [to-dos](https://github.com/jyeungtin/NextDoorScraping/edit/main/README.md#to-do))
 8. Get post user_name and comment user_name 
 
 ## To-do
-1. Scrolling by date is not possible if the date is less than a year ago but in a different year (e.g., you cannot scroll to dec 2021 if we are now nov 2022). See point 4 for an elaboration.
+1. Get neighbourhood data 
+2. Not urgent, but can also automate login processes and allow for multiple neighbourhoods to be examined (this is not within the scope of the project)
+3. Scrolling by date may be at times faulty as the feed on Nextdoor is not solely ranked by post date, but also other factors. If we are to scroll by date, we may stumble upon a 2-year-old post in the middle of newer posts. This is to be resolved.
+
+## Backlog
+1. Multimedia content
 2. Get reactions categorisations (sad, likes, laughs, etc.)
-3. Not urgent, but can also automate login processes and allow for multiple neighbourhoods to be examined (this is not within the scope of the project)
-4. Add a function to check date difference to correctly parse date. Nextdoor will not show the year if the date is not at least a year old (e.g., if today is 23/10/2022, 01/11/2021 will be shown as 1 nov. instead of 1 nov. 2021). A new function needs to be written to solve this problem. 
