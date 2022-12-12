@@ -1,5 +1,5 @@
 # NextDoorScraping
-This is an extended project for <em> Building Communitarianism in Diverse Neighbourhoods : A Perspective of Communication Infrastructure Theory </em> (honours thesis, under supervision of Duyvendak & Hurenkamp in 2021). The original paper investigats how hyperlocal social media Nextdoor facilitates community building through the lens of communication infrastructure theory (CIT, Ball-Rokeach et al., 2001) by the means of manual qualitative content analysis. 
+This is an extended project for <em> Building Communitarianism in Diverse Neighbourhoods : A Perspective of Communication Infrastructure Theory </em> (honours thesis, under supervision of Duyvendak, J.W. & Hurenkamp, M. in 2021). The original paper investigats how hyperlocal social media Nextdoor facilitates community building through the lens of communication infrastructure theory (CIT, Ball-Rokeach et al., 2001) by the means of manual qualitative content analysis. 
 
 This extended project is to automate the data collection process on Nextdoor to make the procedure more efficient and allow for a multi-method approach to analyse Nextdoor. 
 
