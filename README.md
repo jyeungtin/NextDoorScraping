@@ -6,7 +6,7 @@ This extended project is to automate the data collection process on Nextdoor to 
 Latest update: 23/10/2022
 
 ## Current Status
-Initial code commited. However, there are few [to-dos](https://github.com/jyeungtin/NextDoorScraping/edit/main/README.md#to-do) to make the scraping more efficient and complete. 
+Alpha testing with rough functions. There are few [to-dos](https://github.com/jyeungtin/NextDoorScraping/edit/main/README.md#to-do) to make the scraping more efficient and complete. 
 
 The scraping of the following items can be automated:
 
