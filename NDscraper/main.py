@@ -1,38 +1,48 @@
 #get links from result lists
-from bs4 import element
-from pandas import DataFrame
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
-post_grid = driver.find_elements(By.CLASS_NAME, "css-15wtqd7") #pass list of individual posts to post_grid
+post_grid = driver.find_elements(By.CLASS_NAME, "css-n4lbsh") #pass list of individual posts to post_grid
 
 post = []
 text = []
+neighbourhood_name = []
+post_username = []
 comment_count = []
 post_date = []
 reaction_count = []
 
 
 for i in range(len(post_grid)):
-    try:
-        while i == 0: #click on all "more comments" button for the first iteration
-            post_grid[i].find_element(By.CLASS_NAME, "css-adjc8x").click() #class css-adjc8x is the class name for more comments
+    try: 
+        print(f"Current post: {i}") #Tell us which post the script is processing :)
+
+        #click on  "more comments" and "more content" button and find comments count
+        try:
+            comment_button = post_grid[i].find_element(By.CLASS_NAME, "css-mn71l5").find_element(By.CSS_SELECTOR, 'button') #find more comments button
+            driver.execute_script("arguments[0].click();", comment_button) #use javascript to click the button
+
+            expand_text_button = post_grid[i].find_element(By.CLASS_NAME, "css-zglld0").find_element(By.CSS_SELECTOR, 'button') #find expand text button
+            driver.execute_script("arguments[0].click();", expand_text_button) #use javascript to click the button
+            
+            time.sleep(1) #wait one second for comments to load in
+
+        except NoSuchElementException:
+            pass
+  
+        #get post comment counts 
+        temp_comment_count = post_grid[i].find_element(By.CLASS_NAME, "css-13yklgh").find_elements(By.CLASS_NAME, "_2kP4d1Rw") #return list of comment (if any)
+        comment_count.append(len(temp_comment_count))
 
         post_id = post_grid[i].get_attribute("id") #get the post id 
 
+        #get post user
+        post_user = post_grid[i].find_element(By.CLASS_NAME, "E7NPJ3WK").text
+
         #get post text
         post_text = post_grid[i].find_element(By.CLASS_NAME, "content-body").text #get body text from post[i]
-
-        #get post comment counts 
-        comment = post_grid[i].find_element(By.CLASS_NAME, "comment-container").find_elements(By.CLASS_NAME, "Linkify") #return list of comment (if any)
-
-        temp_comment_count = len(comment)
             
         #get post date
         byline = post_grid[i].find_elements(By.CLASS_NAME, "post-byline-redesign") #getting two elements from byline
+
+        neighbourhood = byline[0].text #pass the first element to neighbourhood name
 
         date = byline[1].text #pass the second element to date 
 
@@ -43,58 +53,15 @@ for i in range(len(post_grid)):
         #get reactions, including likes and other emojis
         temp_reaction_count = get_reaction()
 
+        '''''
+        Append all extracted information to the lists 
+        '''''
         post.append(post_id) 
         text.append(post_text)
-        comment_count.append(temp_comment_count)
+        neighbourhood_name.append(neighbourhood)
+        post_username.append(post_user)
         reaction_count.append(temp_reaction_count)
         post_date.append(changed_date)
-
-        print(f"Processed post: {i}")
         
-
-    except NoSuchElementException:
+    except NoSuchElementException: #handle exception where no element indicated was found
         pass
-
-
-#Create data frame
-all_post = pd.DataFrame(columns=['ID','Text','Comment Count'])
-
-all_post['ID'] = post
-all_post['Text'] = text
-all_post['Comment Count'] = comment_count
-all_post['Date'] = post_date
-all_post['Reaction Count'] = reaction_count
-
-all_post.head(20)
-
-#Specific function for actual comment as it requires a set of different data structure 
-
-comment = []
-comment_post_id = []
-
-for i in range(len(post_grid)):
-    try:
-        post_id = post_grid[i].get_attribute("id") #get post id
-
-        temp_comment_count = post_grid[i].find_element(By.CLASS_NAME, "comment-container").find_elements(By.CLASS_NAME, "Linkify") #return list of comment (if any)
-        
-        if temp_comment_count != 0:
-            for comment_num in range(len(temp_comment_count)):
-                comment_text = post_grid[i].find_element(By.CLASS_NAME, "comment-container").find_elements(By.CLASS_NAME, "Linkify")[comment_num].text
-
-                comment.append(comment_text)
-                comment_post_id.append(post_id)
-    except NoSuchElementException:
-        pass
-
-
-#Create comment texts dataframe
-detailed_comment = pd.DataFrame(columns=["ID","Comment"])
-
-detailed_comment['ID'] = comment_post_id
-detailed_comment['Comment'] = comment
-
-#Merge dataframe
-all_post = all_post.merge(detailed_comment, on = "ID", how = "left")
-
-all_post.head(20)
