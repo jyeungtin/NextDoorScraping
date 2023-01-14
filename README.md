@@ -3,7 +3,7 @@ This is an extended project for <em> Building Communitarianism in Diverse Neighb
 
 This extended project is to automate the data collection process on Nextdoor to make the procedure more efficient and allow for a multi-method approach to analyse Nextdoor. 
 
-Latest update: 13/01/2023
+Latest update: 15/01/2023
 
 ## IMPORTANT NOTE!
 The scraper only works for the Dutch version of NextDoor right now!
