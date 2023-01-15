@@ -6,7 +6,9 @@ This extended project is to automate the data collection process on Nextdoor to 
 Latest update: 15/01/2023
 
 ## IMPORTANT NOTE!
-The scraper only works for the Dutch version of NextDoor right now!
+The scraper only works for the Dutch version of NextDoor right now! 
+
+If you wish to contribute to the scraper, please contact me on Twitter.
 
 ## Current Status
 Alpha testing! There are few [to-dos](https://github.com/jyeungtin/NextDoorScraping/edit/main/README.md#to-do) to make the scraping more efficient and complete. 
